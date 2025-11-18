@@ -1,0 +1,6 @@
+/* Remove arrows in Chrome, Edge, Safari */
+.no-arrow::-webkit-inner-spin-button,
+.no-arrow::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
