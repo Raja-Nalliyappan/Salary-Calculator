@@ -65,7 +65,6 @@ function hoursAmountCal() {
     let finalAmountTwo = finalAmountOne * Number(hoursCount.value);
 
     hoursAmount.value = finalAmountTwo.toFixed(2);
-
 }
 
 hoursCount.addEventListener("input", hoursAmountCal);
@@ -78,7 +77,6 @@ function extraStaffingAmountCal() {
     let finalAmountTwo = finalAmount * Number(extraStaffingCount.value);
 
     extraStaffingAmount.value = finalAmountTwo.toFixed(2);
-
 }
 
 extraStaffingCount.addEventListener("input", extraStaffingAmountCal);
@@ -94,7 +92,6 @@ nightShiftCount.addEventListener("input", splTotoalAmountCal)
 hoursCount.addEventListener("input", splTotoalAmountCal);
 extraStaffingCount.addEventListener("input", splTotoalAmountCal);
 
-
 function submitNetPay() {
 
     let netPay = Number(grossTotal.value) - Number(deductionTotal.value) + Number(totalAllowance.value)
@@ -104,7 +101,4 @@ function submitNetPay() {
     } else {
         document.getElementById("nps").innerText = netPay;
     }
-
-    console.log(netPay)
-
 }
