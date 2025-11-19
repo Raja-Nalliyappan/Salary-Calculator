@@ -86,8 +86,7 @@ extraStaffingCount.addEventListener("input", extraStaffingAmountCal);
 function splTotoalAmountCal() {
     let allowanceTotal = Number(eveningShiftAmount.value) + Number(nightShiftAmount.value) + Number(hoursAmount.value) + Number(extraStaffingAmount.value)
 
-    totalAllowance.value = allowanceTotal
-
+    totalAllowance.value = allowanceTotal.toFixed(2)
 }
 
 eveningShiftCount.addEventListener("input", splTotoalAmountCal)
