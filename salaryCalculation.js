@@ -95,17 +95,16 @@ extraStaffingCount.addEventListener("input", splTotoalAmountCal);
 function submitNetPay() {
 
     let deductionTotalVal = Number(deductionTotal.value)
-
-    if(deductionTotalVal <= 0){
-        alert("Please enter your deduction amount");
-        return
-    }
-
     let netPay = Number(grossTotal.value) - Number(deductionTotal.value) + Number(totalAllowance.value)
 
     if (netPay <= 0) {
         alert("Please enter your salary amount");
-    } else {
+        return;
+    } else if (deductionTotalVal <= 0) {
+        alert("Please enter your deduction amount");
+        return;
+    }
+    else {
         document.getElementById("nps").innerText = netPay;
     }
 }
