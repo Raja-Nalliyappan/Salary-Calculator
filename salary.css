@@ -1,3 +1,18 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex: 1;
+}
+
 /* Remove arrows in Chrome, Edge, Safari */
 .no-arrow::-webkit-inner-spin-button,
 .no-arrow::-webkit-outer-spin-button {

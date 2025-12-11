@@ -21,32 +21,64 @@ let extraStaffingCount = document.getElementById("estaffingc");
 let extraStaffingAmount = document.getElementById("estaffinga");
 let totalAllowance = document.getElementById("totalallowance");
 
+let rs = document.getElementById("rs");
+let differenceAmount = document.getElementById("dfamount");
 
-earnedBasic.addEventListener("input", calculateGrossPay);
-earnedHRA.addEventListener("input", calculateGrossPay);
-earnedConveyance.addEventListener("input", calculateGrossPay);
-earnedMedicalReimbu.addEventListener("input", calculateGrossPay);
-earnedSpecialAllowance.addEventListener("input", calculateGrossPay);
-earnedBonus.addEventListener("input", calculateGrossPay);
+let netPay = 0;
 
-pfAmount.addEventListener("input", calculateDeductionTotal);
-esiAmount.addEventListener("input", calculateDeductionTotal);
-professionalTax.addEventListener("input", calculateDeductionTotal);
-otherDeduction.addEventListener("input", calculateDeductionTotal);
+[earnedBasic, earnedHRA, earnedConveyance,earnedMedicalReimbu, earnedSpecialAllowance, earnedBonus].forEach(ea => ea.addEventListener("input", calculateGrossPay));
+[pfAmount, esiAmount, professionalTax, otherDeduction].forEach(ea => ea.addEventListener("input", calculateDeductionTotal));
+[eveningShiftCount, nightShiftCount, hoursCount, extraStaffingCount].forEach(ea=>ea.addEventListener("input",splTotoalAmountCal));
 
 function calculateGrossPay() {
-
     let totalGross = Number(earnedBasic.value) + Number(earnedHRA.value) + Number(earnedConveyance.value) + Number(earnedMedicalReimbu.value) + Number(earnedSpecialAllowance.value) + Number(earnedBonus.value)
     grossTotal.value = totalGross
-
     hoursAmountCal()
     extraStaffingAmountCal()
 }
 
 function calculateDeductionTotal() {
     let totaldeduction = Number(pfAmount.value) + Number(esiAmount.value) + Number(professionalTax.value) + Number(otherDeduction.value)
-
     deductionTotal.value = totaldeduction
+}
+
+function hoursAmountCal() {
+    let hoursCal = Number(grossTotal.value) / 30;
+    let finalAmount = hoursCal / 8
+    let finalAmountOne = finalAmount * 2
+    let finalAmountTwo = finalAmountOne * Number(hoursCount.value);
+    hoursAmount.value = finalAmountTwo.toFixed(2);
+}
+
+function extraStaffingAmountCal() {
+    let hoursCal = Number(grossTotal.value) / 31;
+    let finalAmount = hoursCal * 2
+    let finalAmountTwo = finalAmount * Number(extraStaffingCount.value);
+    extraStaffingAmount.value = finalAmountTwo.toFixed(2);
+}
+
+function splTotoalAmountCal() {
+    let allowanceTotal = Number(eveningShiftAmount.value) + Number(nightShiftAmount.value) + Number(hoursAmount.value) + Number(extraStaffingAmount.value)
+    totalAllowance.value = allowanceTotal.toFixed(2)
+}
+
+function submitNetPay() {
+    calculateGrossPay()
+    calculateDeductionTotal()
+    splTotoalAmountCal()
+    // let deductionTotalVal = Number(deductionTotal.value)
+    netPay = Number(grossTotal.value) - Number(deductionTotal.value) + Number(totalAllowance.value)
+
+    if (netPay <= 0) {
+        alert("Please enter your salary amount");
+        return;
+    } else if (deductionTotal.value <= 0) {
+        alert("Please enter your deduction amount");
+        return;
+    }
+    else {
+        document.getElementById("nps").innerText = netPay.toFixed(2);
+    }
 }
 
 eveningShiftCount.addEventListener("input", function () {
@@ -57,54 +89,11 @@ nightShiftCount.addEventListener("input", function () {
     nightShiftAmount.value = Number(nightShiftCount.value) * 160;
 });
 
-function hoursAmountCal() {
-
-    let hoursCal = Number(grossTotal.value) / 30;
-    let finalAmount = hoursCal / 8
-    let finalAmountOne = finalAmount * 2
-    let finalAmountTwo = finalAmountOne * Number(hoursCount.value);
-
-    hoursAmount.value = finalAmountTwo.toFixed(2);
-}
-
 hoursCount.addEventListener("input", hoursAmountCal);
-
-
-function extraStaffingAmountCal() {
-
-    let hoursCal = Number(grossTotal.value) / 31;
-    let finalAmount = hoursCal * 2
-    let finalAmountTwo = finalAmount * Number(extraStaffingCount.value);
-
-    extraStaffingAmount.value = finalAmountTwo.toFixed(2);
-}
 
 extraStaffingCount.addEventListener("input", extraStaffingAmountCal);
 
-function splTotoalAmountCal() {
-    let allowanceTotal = Number(eveningShiftAmount.value) + Number(nightShiftAmount.value) + Number(hoursAmount.value) + Number(extraStaffingAmount.value)
-
-    totalAllowance.value = allowanceTotal.toFixed(2)
-}
-
-eveningShiftCount.addEventListener("input", splTotoalAmountCal)
-nightShiftCount.addEventListener("input", splTotoalAmountCal)
-hoursCount.addEventListener("input", splTotoalAmountCal);
-extraStaffingCount.addEventListener("input", splTotoalAmountCal);
-
-function submitNetPay() {
-
-    let deductionTotalVal = Number(deductionTotal.value)
-    let netPay = Number(grossTotal.value) - Number(deductionTotal.value) + Number(totalAllowance.value)
-
-    if (netPay <= 0) {
-        alert("Please enter your salary amount");
-        return;
-    } else if (deductionTotalVal <= 0) {
-        alert("Please enter your deduction amount");
-        return;
-    }
-    else {
-        document.getElementById("nps").innerText = netPay.toFixed(2);
-    }
-}
+rs.addEventListener("input", function () {
+    let difference = Number(rs.value) - netPay;
+    differenceAmount.innerText = difference.toFixed(2);
+});
