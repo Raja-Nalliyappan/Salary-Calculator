@@ -105,6 +105,6 @@ function submitNetPay() {
         return;
     }
     else {
-        document.getElementById("nps").innerText = netPay;
+        document.getElementById("nps").innerText = netPay.toFixed(2);
     }
 }
