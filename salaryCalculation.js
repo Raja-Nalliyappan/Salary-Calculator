@@ -59,9 +59,9 @@ nightShiftCount.addEventListener("input", function () {
 
 function hoursAmountCal() {
 
-    let hoursCal = Number(grossTotal.value) / 31;
+    let hoursCal = Number(grossTotal.value) / 30;
     let finalAmount = hoursCal / 8
-    let finalAmountOne = finalAmount * 1.5
+    let finalAmountOne = finalAmount * 2
     let finalAmountTwo = finalAmountOne * Number(hoursCount.value);
 
     hoursAmount.value = finalAmountTwo.toFixed(2);
@@ -73,7 +73,7 @@ hoursCount.addEventListener("input", hoursAmountCal);
 function extraStaffingAmountCal() {
 
     let hoursCal = Number(grossTotal.value) / 31;
-    let finalAmount = hoursCal * 1.5
+    let finalAmount = hoursCal * 2
     let finalAmountTwo = finalAmount * Number(extraStaffingCount.value);
 
     extraStaffingAmount.value = finalAmountTwo.toFixed(2);
