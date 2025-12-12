@@ -97,3 +97,18 @@ rs.addEventListener("input", function () {
     let difference = Number(rs.value) - netPay;
     differenceAmount.innerText = difference.toFixed(2);
 });
+
+
+window.addEventListener("load", function() {
+    salaryFields.forEach(field => {
+        let storedValue = localStorage.getItem(field.id);
+        if (storedValue) {
+            field.value = storedValue;
+        }
+    });
+
+    // Recalculate totals after restoring values
+    calculateGrossPay();
+    calculateDeductionTotal();
+    splTotoalAmountCal();
+});
