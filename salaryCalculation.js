@@ -101,6 +101,20 @@ rs.addEventListener("input", function () {
 });
 
 
+// Elements to store
+let salaryFields = [
+    earnedBasic, earnedHRA, earnedConveyance, earnedMedicalReimbu, earnedSpecialAllowance, earnedBonus,
+    pfAmount, esiAmount, professionalTax, otherDeduction
+];
+
+// Add event listener to store in localStorage
+salaryFields.forEach(field => {
+    field.addEventListener("input", function() {
+        localStorage.setItem(field.id, field.value);
+    });
+});
+
+
 window.addEventListener("load", function() {
     salaryFields.forEach(field => {
         let storedValue = localStorage.getItem(field.id);
