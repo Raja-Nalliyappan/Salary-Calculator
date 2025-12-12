@@ -25,6 +25,8 @@ let rs = document.getElementById("rs");
 let differenceAmount = document.getElementById("dfamount");
 
 let netPay = 0;
+earnedConveyance.value = 1600;
+earnedMedicalReimbu.value = 1250;
 
 [earnedBasic, earnedHRA, earnedConveyance,earnedMedicalReimbu, earnedSpecialAllowance, earnedBonus].forEach(ea => ea.addEventListener("input", calculateGrossPay));
 [pfAmount, esiAmount, professionalTax, otherDeduction].forEach(ea => ea.addEventListener("input", calculateDeductionTotal));
