@@ -30,7 +30,7 @@ earnedMedicalReimbu.value = 1250;
 
 [earnedBasic, earnedHRA, earnedConveyance,earnedMedicalReimbu, earnedSpecialAllowance, earnedBonus].forEach(ea => ea.addEventListener("input", calculateGrossPay));
 [pfAmount, esiAmount, professionalTax, otherDeduction].forEach(ea => ea.addEventListener("input", calculateDeductionTotal));
-[eveningShiftCount, nightShiftCount, hoursCount, extraStaffingCount].forEach(ea=>ea.addEventListener("input",splTotoalAmountCal));
+// [eveningShiftCount, nightShiftCount, hoursCount, extraStaffingCount].forEach(ea=>ea.addEventListener("input",splTotoalAmountCal));
 
 function calculateGrossPay() {
     let totalGross = Number(earnedBasic.value) + Number(earnedHRA.value) + Number(earnedConveyance.value) + Number(earnedMedicalReimbu.value) + Number(earnedSpecialAllowance.value) + Number(earnedBonus.value)
@@ -50,6 +50,7 @@ function hoursAmountCal() {
     let finalAmountOne = finalAmount * 2
     let finalAmountTwo = finalAmountOne * Number(hoursCount.value);
     hoursAmount.value = finalAmountTwo.toFixed(2);
+    splTotoalAmountCal();
 }
 
 function extraStaffingAmountCal() {
@@ -57,18 +58,18 @@ function extraStaffingAmountCal() {
     let finalAmount = hoursCal * 2
     let finalAmountTwo = finalAmount * Number(extraStaffingCount.value);
     extraStaffingAmount.value = finalAmountTwo.toFixed(2);
+    splTotoalAmountCal();
 }
 
 function splTotoalAmountCal() {
     let allowanceTotal = Number(eveningShiftAmount.value) + Number(nightShiftAmount.value) + Number(hoursAmount.value) + Number(extraStaffingAmount.value)
-    totalAllowance.value = allowanceTotal.toFixed(2)
+    totalAllowance.value = allowanceTotal
 }
 
 function submitNetPay() {
     calculateGrossPay()
     calculateDeductionTotal()
     splTotoalAmountCal()
-    // let deductionTotalVal = Number(deductionTotal.value)
     netPay = Number(grossTotal.value) - Number(deductionTotal.value) + Number(totalAllowance.value)
 
     if (netPay <= 0) {
@@ -83,12 +84,15 @@ function submitNetPay() {
     }
 }
 
+//splTotoalAmountCal() inlude immidiate run for when i apply the amount
 eveningShiftCount.addEventListener("input", function () {
     eveningShiftAmount.value = Number(eveningShiftCount.value) * 120;
+    splTotoalAmountCal();
 });
 
 nightShiftCount.addEventListener("input", function () {
     nightShiftAmount.value = Number(nightShiftCount.value) * 160;
+    splTotoalAmountCal()
 });
 
 hoursCount.addEventListener("input", hoursAmountCal);
@@ -127,4 +131,14 @@ window.addEventListener("load", function() {
     calculateGrossPay();
     calculateDeductionTotal();
     splTotoalAmountCal();
+    resetSpecialAllowances();
 });
+
+
+function resetSpecialAllowances() {
+    eveningShiftAmount.value = "";
+    nightShiftAmount.value = "";
+    hoursAmount.value = "";
+    extraStaffingAmount.value = "";
+    totalAllowance.value = "";
+}
