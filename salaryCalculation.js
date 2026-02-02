@@ -86,12 +86,12 @@ function submitNetPay() {
 
 //splTotoalAmountCal() inlude immidiate run for when i apply the amount
 eveningShiftCount.addEventListener("input", function () {
-    eveningShiftAmount.value = Number(eveningShiftCount.value) * 120;
+    eveningShiftAmount.value = Number(eveningShiftCount.value) * 135;
     splTotoalAmountCal();
 });
 
 nightShiftCount.addEventListener("input", function () {
-    nightShiftAmount.value = Number(nightShiftCount.value) * 160;
+    nightShiftAmount.value = Number(nightShiftCount.value) * 220;
     splTotoalAmountCal()
 });
 
