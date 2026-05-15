@@ -55,7 +55,7 @@ function hoursAmountCal() {
 
 function extraStaffingAmountCal() {
     let hoursCal = Number(grossTotal.value) / 31;
-    let finalAmount = hoursCal * 2
+    let finalAmount = hoursCal * 1
     let finalAmountTwo = finalAmount * Number(extraStaffingCount.value);
     extraStaffingAmount.value = finalAmountTwo.toFixed(2);
     splTotoalAmountCal();
